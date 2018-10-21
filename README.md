@@ -236,12 +236,12 @@
 
 ## Core React
 
-1. ### What is React?
+1. ### 什么是React?
 
     React is an **open-source frontend JavaScript library** which is used for building user interfaces especially for single page applications. It is used for handling view layer for web and mobile apps. React was created by Jordan Walke, a software engineer working for Facebook. React was first deployed on Facebook's News Feed in 2011 and on Instagram in 2012.
     react是一个 开源的前端js库（library翻译成库不知妥当不妥当），用来开发用户界面，尤其是单页应用（SPA），处理视图层和移动APP的hybrid页面。Facebook的软件工程师Jordan Walker是react之父。react2011年首次应用于Facebook的新闻提要，2012年应用于Instagram。
 
-2. ### What are the major features of React?
+2. ### React的主要特点是什么?
 
     The major features of React are:
 
@@ -249,8 +249,13 @@
     * Supports **server-side rendering**.
     * Follows *Unidirectional** data flow or data binding.
     * Uses **reusable/composable** UI components to develop the view.
+    react的主要特点：
+    * 用 **虚拟DOM**替代真实DOM，因为操作真实DOM非常耗性能
+    * 支持 **服务端渲染**
+    * 单向数据流
+    * 组件复用
 
-3. ### What is JSX?
+3. ### 什么是JSX?
 
     *JSX* is a XML-like syntax extension to ECMAScript (the acronym stands for *JavaScript XML*). Basically it just provides syntactic sugar for the `React.createElement()` function, giving us expressiveness of JavaScript along with HTML like template syntax.
 
@@ -267,12 +272,14 @@
       }
     }
     ```
+    *jsx*是ECMAScript的一种类似XML的语法扩展。其实就是`React.createElement()`的语法糖，可以像模板语法一样写带有HTML的js。
 
-4. ### What is the difference between Element and Component?
+4. ### 元素和组件的区别是什么?
 
     An *Element* is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. *Elements* can contain other *Elements* in their props. Creating a React element is cheap. Once an element is created, it is never mutated.
+    就DOM节点或者其他组件来讲，元素就是描述你想呈现在屏幕上的东西的对象。元素的属性里可以包含其他元素。生成react元素很容易，元素一旦生成就不会变化。
 
-    The object representation of React Element would be as follows:
+    react元素如下所示:
 
     ```javascript
     const element = React.createElement(
@@ -282,7 +289,7 @@
     )
     ```
 
-    The above `React.createElement()` function returns an object:
+    以上的 `React.createElement()` 函数返回以下的对象:
 
     ```
     {
@@ -294,13 +301,14 @@
     }
     ```
 
-    And finally it renders to the DOM using `ReactDOM.render()`:
+   最后用 `ReactDOM.render()`渲染到真实DOM上:
 
     ```html
     <div id='login-btn'>Login</div>
     ```
 
     Whereas a **component** can be declared in several different ways. It can be a class with a `render()` method. Alternatively, in simple cases, it can be defined as a function. In either case, it takes props as an input, and returns an JSX tree as the output:
+    组件可以用不同的方式声明。可以用带有`render()`方法的class，也可以用函数定义。不管用哪种方法，都接受props作为输入，输出一个jsx树。
 
     ```javascript
     const Button = ({ onLogin }) =>
@@ -317,11 +325,11 @@
     )
     ```
 
-5. ### How to create components in React?
+5. ### 在react中怎么创建组件?
 
-    There are two possible ways to create a component.
+    主要有两种方法.
 
-    1. **Function Components:** This is the simplest way to create a component. Those are pure JavaScript functions that accept props object as first parameter and return React elements:
+    1. **函数组件:** 这是创建组件最简单的方法. 纯函数接受props作为第一个参数，输出一个react元素:
 
         ```jsx harmony
         function Greeting({ message }) {
@@ -329,7 +337,7 @@
         }
         ```
 
-    2. **Class Components:** You can also use ES6 class to define a component. The above function component can be written as:
+    2. **Class Components:** 也可以用es6的class创建组件. 以上的函数可以写成:
 
         ```jsx harmony
         class Greeting extends React.Component {
@@ -339,17 +347,17 @@
         }
         ```
 
-6. ### When to use a Class Component over a Function Component?
+6. ### 什么时候选用class而不是function?
 
-    If the component needs *state or lifecycle methods* then use class component otherwise use function component.
+    如果组件需要用到*state or 生命周期方法* .
 
-7. ### What are Pure Components?
+7. ### 什么是纯组件?
 
-    *`React.PureComponent`* is exactly the same as *`React.Component`* except that it handles the `shouldComponentUpdate()` method for you. When props or state changes, *PureComponent* will do a shallow comparison on both props and state. *Component* on the other hand won't compare current props and state to next out of the box. Thus, the component will re-render by default whenever `shouldComponentUpdate` is called.
+    *`React.PureComponent`* 和 *`React.Component`* 一样，除了一点，纯组件帮你处理了 `shouldComponentUpdate()` 方法. 当props或者state变化时， *PureComponent* 会对state和props进行一层钱比较. *Component* 则不会，因此组件在调用 `shouldComponentUpdate` 时都会重新渲染.
 
-8. ### What is state in React?
+8. ### react里的state是什么?
 
-    *State* of a component is an object that holds some information that may change over the lifetime of the component. We should always try to make our state as simple as possible and minimize the number of stateful components. Let's create an user component with message state,
+    *State* 存储组件的信息，信息在生命周期里可能会发生变化。我们应该尽量简化state，并且减少有状态组件。下面我们创建一个带有message状态的user组件。 
 
 
     ```jsx harmony
@@ -374,31 +382,33 @@
 
     ![state](images/state.jpg)
 
-9. ### What are props in React?
+9. ### React里的props是什么?
 
-    *Props* are inputs to components. They are single values or objects containing a set of values that are passed to components on creation using a naming convention similar to HTML-tag attributes. They are data passed down from a parent component to a child component.
+    *Props* 是组件的输入. 它们是一个值或者是包含若干值的对象，在组件创建时通过父组件传给父组件。
 
     The primary purpose of props in React is to provide following component functionality:
+    props的主要目的是提供以下组件的功能：
 
-    1. Pass custom data to your component.
-    2. Trigger state changes.
-    3. Use via `this.props.reactProp` inside component's `render()` method.
+    1. Pass custom data to your component.向组件传递数据。
+    2. Trigger state changes.触发state变化。
+    3. 在组件的`render()` 方法里应用 `this.props.reactProp` .
 
-    For example, let us create an element with `reactProp` property:
+    例如，我们创建一个带有 `reactProp`属性的元素:
 
     ```jsx harmony
     <Element reactProp={'1'} />
     ```
 
-    This `reactProp` (or whatever you came up with) name then becomes a property attached to React's native props object which originally already exists on all components created using React library.
+  
+    这个`reactProp`会成为react原生的props对象，以后所有用react创建的组件都带有这个属性。
 
     ```
     props.reactProp
     ```
 
-10. ### What is the difference between state and props?
-
-    Both *props* and *state* are plain JavaScript objects. While both of them hold information that influences the output of render, they are different in their functionality with respect to component. Props get passed to the component similar to function parameters whereas state is managed within the component similar to variables declared within a function.
+10. ### state 和 props的区别?
+    
+    *props*和*state*都是普通的js对象。虽然它们存储的信息都会影响最后的渲染，但是在组件中的作用不一样。props更像是传递给组件的参数，而state只在组件内起作用，就像在函数体里面声明的局部变量。
 
 11. ### Why should not we update the state directly?
 
