@@ -239,6 +239,7 @@
 1. ### What is React?
 
     React is an **open-source frontend JavaScript library** which is used for building user interfaces especially for single page applications. It is used for handling view layer for web and mobile apps. React was created by Jordan Walke, a software engineer working for Facebook. React was first deployed on Facebook's News Feed in 2011 and on Instagram in 2012.
+    react是一个 开源的前端js库（library翻译成库不知妥当不妥当），用来开发用户界面，尤其是单页应用（SPA），处理视图层和移动APP的hybrid页面。Facebook的软件工程师Jordan Walker是react之父。react2011年首次应用于Facebook的新闻提要，2012年应用于Instagram。
 
 2. ### What are the major features of React?
 
