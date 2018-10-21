@@ -1,5 +1,5 @@
 # 关于React的问题和答案（翻译） 
->原文地址git@github.com:sudheerj/reactjs-interview-questions.git
+>原文地址[git@github.com:sudheerj/reactjs-interview-questions.git]
 > Click :star:if you like the project. Pull Request are highly appreciated.
 
 ### Table of Contents
