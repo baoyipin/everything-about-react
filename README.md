@@ -8,21 +8,21 @@
 | No. | Questions |
 | --- | --------- |
 |   | **Core React** |
-|1  | [What is React?](#what-is-react) |
-|2  | [What are the major features of React?](#what-are-the-major-features-of-react) |
-|3  | [What is JSX?](#what-is-jsx) |
-|4  | [What is the difference between Element and Component?](#what-is-the-difference-between-element-and-component) |
-|5  | [How to create components in React?](#how-to-create-components-in-react) |
-|6  | [When to use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component) |
-|7  | [What are Pure Components?](#what-are-pure-components) |
-|8  | [What is state in React?](#what-is-state-in-react) |
-|9  | [What are props in React?](#what-are-props-in-react) |
-|10 | [What is the difference between state and props?](#what-is-the-difference-between-state-and-props) |
-|11 | [Why should not we update the state directly?](#why-should-not-we-update-the-state-directly) |
-|12 | [What is the purpose of callback function as an argument of setState()?](#what-is-the-purpose-of-callback-function-as-an-argument-of-setstate)
-|13 | [What is the difference between HTML and React event handling?](#what-is-the-difference-between-html-and-react-event-handling) |
-|14 | [How to bind methods or event handlers in JSX callbacks?](#how-to-bind-methods-or-event-handlers-in-jsx-callbacks) |
-|15 | [How to pass a parameter to an event handler or callback?](#how-to-pass-a-parameter-to-an-event-handler-or-callback) |
+|1  | [什么是React?](#what-is-react) |
+|2  | [React的主要特点是什么?](#what-are-the-major-features-of-react) |
+|3  | [什么是JSX?](#what-is-jsx) |
+|4  | [元素和组件的区别是什么?](#what-is-the-difference-between-element-and-component) |
+|5  | [React里怎么创建一个组件?](#how-to-create-components-in-react) |
+|6  | [什么时候选用class组件而不是函数组件?](#when-to-use-a-class-component-over-a-function-component) |
+|7  | [什么是Pure Components?](#what-are-pure-components) |
+|8  | [说一下state?](#what-is-state-in-react) |
+|9  | [说一下props?](#what-are-props-in-react) |
+|10 | [state和props的区别?](#what-is-the-difference-between-state-and-props) |
+|11 | [我们为什么不能直接改变state?](#why-should-not-we-update-the-state-directly) |
+|12 | [setState()里的回调函数的目的是什么?](#what-is-the-purpose-of-callback-function-as-an-argument-of-setstate)
+|13 | [React的事件处理和HTML有什么不同?](#what-is-the-difference-between-html-and-react-event-handling) |
+|14 | [在jsx的回调里怎么绑定事件?](#how-to-bind-methods-or-event-handlers-in-jsx-callbacks) |
+|15 | [怎么给事件的回调传参?](#how-to-pass-a-parameter-to-an-event-handler-or-callback) |
 |16 | [What are synthetic events in React?](#what-are-synthetic-events-in-react) |
 |17 | [What is inline conditional expressions?](#what-is-inline-conditional-expressions) |
 |18 | [What are "key" props and what is the benefit of using them in arrays of elements?](#what-are-key-props-and-what-is-the-benefit-of-using-them-in-arrays-of-elements) |
