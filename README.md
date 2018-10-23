@@ -452,13 +452,13 @@
     <button onClick={activateLasers}>
     ```
 
-    2. In HTML, you can return `false` to prevent default behavior:
+    2. HTML中可以通过返回`false` 组织事件的默认行为:
 
     ```html
     <a href='#' onclick='console.log("The link was clicked."); return false;' />
     ```
 
-    Whereas in React you must call `preventDefault()` explicitly:
+    React中必须调用`preventDefault()`:
 
     ```javascript
     function handleClick(event) {
@@ -467,11 +467,11 @@
     }
     ```
 
-14. ### How to bind methods or event handlers in JSX callbacks?
+14. ###JSX事件中怎么绑定方法?
 
-    There are 3 possible ways to achieve this:
+    有三种可能的方法:
 
-    1.	**Binding in Constructor:** In JavaScript classes, the methods are not bound by default. The same thing applies for React event handlers defined as class methods. Normally we bind them in constructor.
+    1.	**在Constructor中绑定:**
 
     ```javascript
     class Component extends React.Componenet {
@@ -486,7 +486,7 @@
     }
     ```
 
-    2. **Public class fields syntax:** If you don't like to use bind approach then *public class fields syntax* can be used to correctly bind callbacks.
+    2. **公共类字段语法:** （跟第三种不是一样的吗，都是箭头函数，还是尊重作者）
 
     ```jsx harmony
     handleClick = () => {
@@ -500,7 +500,7 @@
     </button>
     ```
 
-    3. **Arrow functions in callbacks:** You can use *arrow functions* directly in the callbacks.
+    3. **箭头函数:** You can use *arrow functions* directly in the callbacks.
 
     ```jsx harmony
     <button onClick={(event) => this.handleClick(event)}>
@@ -508,29 +508,29 @@
     </button>
     ```
 
-    **Note:** If the callback is passed as prop to child components, those components might do an extra re-rendering. In those cases, it is preferred to go with `.bind()` or *public class fields syntax* approach considering performance.
+    **Note:** 如果回调是通过prop传给子组件的，子组件可能会额外的重新渲染一次。这种情况下最好是使用`.bind()`或者公共类字段语法。
 
-15. ### How to pass a parameter to an event handler or callback?
+15. ###怎么朝回调函数中传递参数?
 
-    You can use an *arrow function* to wrap around an *event handler* and pass parameters:
+    可以用箭头函数包住回调函数传参:
 
     ```jsx harmony
     <button onClick={() => this.handleClick(id)} />
     ```
 
-    This is an equivalent to calling `.bind`:
+    和 `.bind`效果一样:
 
     ```jsx harmony
     <button onClick={this.handleClick.bind(this, id)} />
     ```
 
-16. ### What are synthetic events in React?
+16. ### 什么是合成事件?
 
-    ```SyntheticEvent` is a cross-browser wrapper around the browser's native event. It's API is same as the browser's native event, including `stopPropagation()` and `preventDefault()`, except the events work identically across all browsers.
+    ```合成事件` 对原生事件进行了包装，解决了浏览器兼容问题.API和原生事件相同,包括 `stopPropagation()` 和 `preventDefault()`, （还有一点，React并不是将click事件直接绑定在dom上面，而是采用事件冒泡的形式冒泡到document上面，然后React将事件封装给正式的函数处理运行和处理）.
 
-17. ### What is inline conditional expressions?
+17. ### 什么是条件表达式?
 
-    You can use either *if statements* or *ternary expressions* which are available from JS to conditionally render expressions. Apart from these approaches, you can also embed any expressions in JSX by wrapping them in curly braces and then followed by JS logical operator `&&`.
+    你可以用 *if 表达式* 或者 *t三元表达式* 来控制什么需要渲染. 语法如下所示，中间用 `&&`隔开.
 
     ```jsx harmony
     <h1>Hello!</h1>
@@ -544,11 +544,11 @@
 
     <!-- TODO: fix this section -->
 
-18. ### What are "key" props and what is the benefit of using them in arrays of elements?
+18. ### 用数组map时key的作用是什么?
 
-    A `key` is a special string attribute you **should** include when creating arrays of elements. *Keys* help React identify which items have changed, are added, or are removed.
+    *key*帮助react在diff时判断元素是否更改、删除
 
-    Most often we use IDs from our data as *keys*:
+    可以用元素的ID当做 *keys*:
 
     ```jsx harmony
     const todoItems = todos.map((todo) =>
@@ -558,7 +558,7 @@
     )
     ```
 
-    When you don't have stable IDs for rendered items, you may use the item *index* as a *key* as a last resort:
+    实在没有ID的话可以用数组的 *index*当做*key* 。
 
     ```jsx harmony
     const todoItems = todos.map((todo, index) =>
@@ -570,19 +570,18 @@
 
     **Note:**
 
-    1. Using *indexes* for *keys* is **not recommended** if the order of items may change. This can negatively impact performance and may cause issues with component state.
-    2. If you extract list item as separate component then apply *keys* on list component instead of `li` tag.
-    3. There will be a warning message in the console if the `key` prop is not present on list items.
+    1. 如果数组会发生变化的话，非常不推荐用index来当做key. 这样做失去了key本身的目的.
+    2. 如果item是独立的组件，要把 *keys*放在组件的属性上，而不是放到li标签上.
+    3. 如果没有key会报错.
 
-19. ### What is the use of refs?
+19. ### refs的作用是什么?
 
-    The *ref* is used to return a reference to the element. They *should be avoided* in most cases, however, they can be useful when you need a direct access to the DOM element or an instance of a component.
+   *ref*是元素的引用. 不推荐使用，但是在操作DOM的时候会比较方便
 
-20. ### How to create refs?
+20. ### refs怎么用?
 
-    There are two approaches
-    1. This is a recently added approach. *Refs* are created using `React.createRef()` method and attached to React elements via the `ref` attribute. In order to use *refs* throughout the component, just assign the *ref* to the instance property within constructor.
-
+    两种方法
+    1. 这是一种新增加的方式. *Refs*通过`React.createRef()` 方法生成然后通过ref属性放到react元素上。如果想在组件里随时随地使用refs，可以在constructor里将ref赋给组件实例 。
     ```jsx harmony
     class MyComponent extends React.Component {
       constructor(props) {
@@ -594,7 +593,7 @@
       }
     }
     ```
-    2. You can also use ref callbacks approach regardless of React version. For example, the search bar component's input element accessed as follows,
+    2. 用ref回调函数，如下所示：
     ```jsx harmony
     class SearchBar extends Component {
        constructor(props) {
@@ -619,8 +618,8 @@
     }
     ```
 
-    You can also use *refs* in function components using **closures**.
-    **Note**: You can also use inline ref callbacks even though it is not a recommended approach
+    在函数式组件中可以用 **闭包**.
+    **Note**: 也可以用行内的ref回调函数，不推荐这么做
 21. ### What are forward refs?
 
     *Ref forwarding* is a feature that lets some components take a *ref* they receive, and pass it further down to a child.
