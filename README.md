@@ -620,9 +620,9 @@
 
     在函数式组件中可以用 **闭包**.
     **Note**: 也可以用行内的ref回调函数，不推荐这么做
-21. ### What are forward refs?
+21. ###什么是 forward refs?
 
-    *Ref forwarding* is a feature that lets some components take a *ref* they receive, and pass it further down to a child.
+    *Ref forwarding* 是指一些组件接收ref，并把其传递给子组件的特性。
 
     ```jsx harmony
     const ButtonElement = React.forwardRef((props, ref) => (
@@ -636,11 +636,11 @@
     <ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>
     ```
 
-22. ### Which is preferred option with in callback refs and findDOMNode()?
+22. ###  refs和findDOMNode()哪个更好?
 
-    It is preferred to use *callback refs* over `findDOMNode()` API. Because `findDOMNode()` prevents certain improvements in React in the future.
+    最好用*callback refs* 而不是 `findDOMNode()` API.因为 `findDOMNode()` 在未来的react版本中有局限性。
 
-    The **legacy** approach of using `findDOMNode`:
+    使用 `findDOMNode`的方法，不推荐:
 
     ```javascript
     class MyComponent extends Component {
@@ -654,7 +654,7 @@
     }
     ```
 
-    The recommended approach is:
+    推荐方法:
 
     ```javascript
     class MyComponent extends Component {
@@ -668,13 +668,13 @@
     }
     ```
 
-23. ### Why are String Refs legacy?
+23. ### 为什么不推荐使用字符串refs?
+    
+    如果你使用过比较老版本的react，你也许对`ref={'textInput'}`,`this.refs.textInput`，这种使用ref的方式比较熟悉。但是现在已经不推荐使用字符串ref了，在**16版本已经被移除**了。
 
-    If you worked with React before, you might be familiar with an older API where the `ref` attribute is a string, like `ref={'textInput'}`, and the DOM node is accessed as `this.refs.textInput`. We advise against it because *string refs have below issues*, and are considered legacy. String refs were **removed in React v16**.
-
-    1. They *force React to keep track of currently executing component*. This is problematic because it makes react module stateful, and thus causes weird errors when react module is duplicated in the bundle.
-    2. They are *not composable* — if a library puts a ref on the passed child, the user can't put another ref on it. Callback refs are perfectly composable.
-    3. They *don't work with static analysis* like Flow. Flow can't guess the magic that framework does to make the string ref appear on `this.refs`, as well as its type (which could be different). Callback refs are friendlier to static analysis.
+    1. 它们*迫使react跟踪正在执行的组件*。 这样会造成react模块有状态，在react模块在打包复制时会造成奇怪的错误。
+    2. 它们 *不可组合* —如果在元素上加了一个ref，就不能在加了. 但是回调ref就是*可组合*的
+    3. 它们 *不适合静态分析* like Flow. Flow can't guess the magic that framework does to make the string ref appear on `this.refs`, as well as its type (which could be different). Callback refs are friendlier to static analysis.
     4. It doesn't work as most people would expect with the "render callback" pattern (e.g. <DataGrid renderRow={this.renderRow} />)
        ```jsx harmony
        class MyComponent extends Component {
@@ -691,52 +691,49 @@
          }
        }
        ```
-24. ### What is Virtual DOM?
+24. ### 什么是虚拟DOM?
+    
+    虚拟dom是真实dom在内存中的镜像。UI的镜像存储在内存中并且和真实dom同步。在render之前，操作屏幕上的元素后起作用。这整个过程被称作*reconciliation*。
+25. ### 虚拟dom是怎么工作的?
 
-    The *Virtual DOM* (VDOM) is an in-memory representation of *Real DOM*. The representation of a UI is kept in memory and synced with the "real" DOM. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called *reconciliation*.
+    *虚拟DOM* 工作分三步.
 
-25. ### How Virtual DOM works?
-
-    The *Virtual DOM* works in three simple steps.
-
-    1. Whenever any underlying data changes, the entire UI is re-rendered in Virtual DOM representation.
+    1. 组件状态变化时，虚拟dom都会发生变化。
         ![vdom](images/vdom1.png)
 
-    2. Then the difference between the previous DOM representation and the new one is calculated.
+    2. 把变化后的虚拟dom和前一个版本的虚拟dom进行对比。
         ![vdom2](images/vdom2.png)
 
-    3. Once the calculations are done, the real DOM will be updated with only the things that have actually changed.
+    3. 真是dom中只有真正发生变化的部分才会重新渲染。
         ![vdom3](images/vdom3.png)
 
-26. ### What is the difference between Shadow DOM and Virtual DOM?
+26. ### 影子DOM 和虚拟DOM有什么区别?
 
-    The *Shadow DOM* is a browser technology designed primarily for scoping variables and CSS in *web components*. The *Virtual DOM* is a concept implemented by libraries in JavaScript on top of browser APIs.
+    *影子DOM* 是一种浏览器技术，最初是用在*web components*中的范围变量和css里的。而 *虚拟 DOM*建立在浏览器APIs之上，植入到js语法中的概念.
 
-27. ### What is React Fiber?
+27. ### React Fiber是什么?
+    
+    Fiber是react16版本里引入的reconciliation核心算法。目的是在动画，布局，姿势，等方面提高react的适应性。改变了组件的渲染机制，原先都是同步渲染的，现在可以异步渲染，执行优先级更高的任务，释放浏览器主线程。
+28. ### React Fiber的目的是什么?
 
-    Fiber is the new *reconciliation* engine or reimplementation of core algorithm in React v16. The goal of React Fiber is to increase its suitability for areas like animation, layout, gestures, ability to pause, abort, or reuse work and assign priority to different types of updates; and new concurrency primitives.
+    *React Fiber* 的主要目的是提高在动画、布局、动作等方面的适用性。最主要的特点就是**增量渲染**: 将同步渲染改成异步，执行优先级更高的任务，释放浏览器的主线程。
 
-28. ### What is the main goal of React Fiber?
+29. ### 什么是受控组件?
 
-    The goal of *React Fiber* is to increase its suitability for areas like animation, layout, and gestures. Its headline feature is **incremental rendering**: the ability to split rendering work into chunks and spread it out over multiple frames.
+    包含接受用户输入的input元素并受其控制的组件成为受控组件，也就是说，每个状态变化都会有相应的处理函数。
 
-29. ### What are controlled components?
-
-    A component that controls the input elements within the forms on subsequent user input is called **Controlled Component**, i.e, every state mutation will have an associated handler function.
-
-    For example, to write all the names in uppercase letters, we use handleChange as below,
-
+    例如，为了把所有的名字大写，我们可以像下面这么做，
     ```javascript
     handleChange(event) {
       this.setState({value: event.target.value.toUpperCase()})
     }
     ```
 
-30. ### What are uncontrolled components?
+30. ###什么是非受控组件?
 
-    The **Uncontrolled Components** are the ones that store their own state internally, and you query the DOM using a ref to find its current value when you need it. This is a bit more like traditional HTML.
+    **非受控组件** 在组件内部存储自己的状态,如果你需要元素的值可以通过ref获得，有点跟普通的HTML类似。
 
-    In the below UserProfile component, the `name` input is accessed using ref.
+   在下面的 UserProfile 组件中, `name`输入是通过ref获得的.
 
     ```jsx harmony
     class UserProfile extends React.Component {
@@ -765,7 +762,7 @@
     }
     ```
 
-    In most cases, it's recommend to use controlled components to implement forms.
+    在大多数情况下推荐使用受控组件
 
 31. ### What is the difference between createElement and cloneElement?
 
