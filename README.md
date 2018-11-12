@@ -764,25 +764,25 @@
 
     在大多数情况下推荐使用受控组件
 
-31. ### What is the difference between createElement and cloneElement?
+31. ### createElement 和 cloneElement的区别是什么?
 
-    JSX elements will be transpiled to `React.createElement()` functions to create React elements which are going to be used for the object representation of UI. Whereas `cloneElement` is used to clone an element and pass it new props.
+    JSX 元素都会通过调用 `React.createElement()` 函数转变成react元素 . 而 `cloneElement` 是用来复制一个元素并向其传递props.
 
-32. ### What is Lifting State Up in React?
+32. ### React中的状态提升是什么?
+   
+    当多个组件公用一个状态时，最好把这个状态放到这些组件的一个公共祖先那里，这就叫状态提升。
 
-    When several components need to share the same changing data then it is recommended to *lift the shared state up* to their closest common ancestor. That means if two child components share the same data from its parent, then move the state to parent instead of maintaining local state in both of the child components.
+33. ### 组件的生命周期都有哪些阶段?
 
-33. ### What are the different phases of component lifecycle?
+    组件生命周期主要分为四个阶段.
 
-    There are four different phases of component lifecycle.
+    1. **初始化:** 执行构造函数，初始化状态和props.
 
-    1. **Initialization:** In this phase component prepares setting up the initial state and default props.
+    2. **挂载:** 组件挂载到真实dom上. 这个阶段包括 `componentWillMount()` 和 `componentDidMount()`钩子函数，还有render方法.
 
-    2. **Mounting:** The component is ready to mount in the browser DOM. This phase covers `componentWillMount()` and `componentDidMount()` lifecycle methods.
+    3. **更新:** 这个阶段组件通过两种方式更新，一种是接受新的props，一种是更新state。这个阶段包括 `shouldComponentUpdate()`, `componentWillUpdate()` 和 `componentDidUpdate()` 钩子函数（还有componentwillreceiveprops呀）.
 
-    3. **Updating:** In this phase, the component get updated in two ways, sending the new props and updating the state. This phase covers `shouldComponentUpdate()`, `componentWillUpdate()` and `componentDidUpdate()` lifecycle methods.
-
-    4. **Unmounting:** In this last phase, the component is not needed and get unmounted from the browser DOM. This phase includes `componentWillUnmount()` lifecycle method.
+    4. **卸载:** 这个阶段组件从真实dom上卸载. 包括`componentWillUnmount()` 钩子函数.
         ![phases](images/phases.png)
 
     <!-- TODO: new lifecycle methods in React v16 -->
