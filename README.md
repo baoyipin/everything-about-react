@@ -787,34 +787,34 @@
 
     <!-- TODO: new lifecycle methods in React v16 -->
 
-34. ### What are the lifecycle methods of React?
+34. ### React的生命周期方法有哪些?
 
-    - **componentWillMount:** Executed before rendering and is used for App level configuration in your root component.
-    - **componentDidMount:** Executed after first rendering and here all AJAX requests, DOM or state updates, and set up event listeners should occur.
-    - **componentWillReceiveProps:** Executed when particular prop updates to trigger state transitions.
-    - **shouldComponentUpdate:** Determines if the component will be updated or not. By default it returns true. If you are sure that the component doesn't need to render after state or props are updated, you can return false value. It is a great place to improve performance as it allows you to prevent a re-render if component receives new prop.
-    - **componentWillUpdate:** Executed before re-rendering the component when there are props & state changes confirmed by `shouldComponentUpdate()` which returns true.
-    - **componentDidUpdate:** Mostly it is used to update the DOM in response to prop or state changes.
-    - **componentWillUnmount:** It will be used to cancel any outgoing network requests, or remove all event listeners associated with the component.
+    - **componentWillMount:** 渲染之前执行，在根组件上进行APP级别的配置.
+    - **componentDidMount:** 第一次渲染后执行，使用的比较多，ajax请求，dom更新，状态更新，监听事件都在这里进行.
+    - **componentWillReceiveProps:** props 更新触发状态更新是触发.
+    - **shouldComponentUpdate:** 决定组件是否更新，默认是true。如果你确定组件在状态或者prop更新是不需要重新渲染，可以return false。可以减少不必要的重新渲染从而显著提高性能.
+    - **componentWillUpdate:** 当props和state的变化被shouldComponentUpdate确认并返回true时，在组件重新渲染之前触发.
+    - **componentDidUpdate:** 通常用来根据prop和state的变化更新dom。.
+    - **componentWillUnmount:** 用来曲线所有的网络请求，移除事件监听等.
 
     <!-- TODO: new lifecycle methods in React v16 -->
 
-35. ### What are Higher-Order Components?
+35. ### 什么是告诫组件?
 
-    A *higher-order component* (*HOC*) is a function that takes a component and returns a new component. Basically, it's a pattern that is derived from React's compositional nature.
+    *高阶组件*是一个函数，接收一个组件作为参数并返回一个新的组件。本质上起源于react的组合特性.
 
-    We call them **pure components** because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
+    我们称他们为**纯组件**，因为他们可以接收任何子组件作为参数，但是既不会修改输入组件的行为特性，也不会复制他们.
 
     ```javascript
     const EnhancedComponent = higherOrderComponent(WrappedComponent)
     ```
 
-    HOC can be used for many use cases:
+    HOC 可以用于以下几种情况:
 
-    1. Code reuse, logic and bootstrap abstraction.
-    2. Render hijacking.
-    3. State abstraction and manipulation.
-    4. Props manipulation.
+    1. 代码复用，逻辑抽象Code reuse, logic and bootstrap abstraction.
+    2. 渲染劫持.
+    3. state抽象或者操作.
+    4. 操作props.
 
 36. ### How to create props proxy for HOC component?
 
