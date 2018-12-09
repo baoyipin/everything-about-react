@@ -816,9 +816,9 @@
     3. state抽象或者操作.
     4. 操作props.
 
-36. ### How to create props proxy for HOC component?
+36. ### 怎么给高阶组件创建属性代理（proxy）?
 
-    You can add/edit props passed to the component using *props proxy* pattern like this:
+    你可以像下面这样使用*props proxy*来添加或者编辑传递给组件的props：
 
     ```jsx harmony
     function HOC(WrappedComponent) {
@@ -837,20 +837,20 @@
     }
     ```
 
-37. ### What is context?
+37. ### 什么是context?
 
-    *Context* provides a way to pass data through the component tree without having to pass props down manually at every level. For example, authenticated user, locale preference, UI theme need to be accessed in the application by many components.
+    *Context* 提供了一种在组件树种传递参数的方法，不用每次都必须通过组件树的每个层级进行传递。
 
     ```javascript
     const {Provider, Consumer} = React.createContext(defaultValue)
     ```
 
-38. ### What is children prop?
+38. ### children属性是什么?
 
-    *Children* is a prop (`this.prop.children`) that allow you to pass components as data to other components, just like any other prop you use. Component tree put between component's opening and closing tag will be passed to that component as `children` prop.
+    *Children* 允许你将组件当做属性（`this.prop.children`）传递给其他组件。组件标签间的组件树会通过`children`属性传递给该组件。
 
-    There are a number of methods available in the React API to work with this prop. These include `React.Children.map`, `React.Children.forEach`, `React.Children.count`, `React.Children.only`, `React.Children.toArray`.
-    A simple usage of children prop looks as below,
+    React的API中有很多方法可以操作这个属性，如`React.Children.map`,`React.Children.forEach`,`React.Children.only`,`React.Children.toArray`。
+    下面是一种简单的应用示例：
 
     ```jsx harmony
     const MyDiv = React.createClass({
